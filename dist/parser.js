@@ -17,43 +17,29 @@ const matchByRegExp = (md, rule, type) => {
     };
 };
 const parse = (md) => {
+    const buildNode = (root) => {
+        for (let i_r = 0; i_r < root.length; i_r++) {
+            const ELM = root[i_r];
+            if ()
+                ;
+        }
+        return root;
+    };
     let root = [];
-    Object.keys(RULE).forEach(n => {
+    let text = [...md];
+    Object.keys(RULE).forEach((n) => {
         const RES = matchByRegExp(md, RULE[n][0], n);
-        RES.token.forEach(e => root.push([e]));
+        RES.token.forEach((e) => {
+            root.push([e]);
+        });
     });
-    console.log(root);
-    for (let i_r = 0; i_r < root.length; i_r++) {
-        const element = root[i_r];
-    }
+    return root;
 };
 const bold = (txt) => {
-    let m1 = "";
-    let c = "";
-    let f = false;
-    let res = [];
-    for (let i = 0; i < txt.length; i++) {
-        if (txt[i] === "'") {
-            m1 += "'";
-        }
-        else {
-            m1 = "";
-        }
-        if (m1 === "''") {
-            f = !f;
-        }
-        if (f) {
-            c += txt[i];
-        }
-        else {
-            res.push(c);
-            c = "";
-        }
-    }
-    return res;
 };
-//parse(`もじもじ **太字** %%斜体%%の文字**文字の%%中に%%ネスト**`);
-console.log(bold("''太字左'''斜体'''太字右''ふつーーー''太字''"));
+console.log(parse(`もじもじ **太字** %%斜体%%の文字**文字の%%中に%%ネスト**`)
+//bold("''太字左'''斜体'''太字右''ふつーーー''太字''")
+);
 `
 詳しくは
 http://manual.wiki.fc2.com/

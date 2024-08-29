@@ -3,16 +3,9 @@ import { RULE } from "./token.js";
 
 
 
-type Node = {
+type token = {
     type: string,
     data: RegExpExecArray
-}
-
-type Token = {
-    id: string,
-    type: string,
-    value: string,
-    parent: object[] | undefined
 }
 
 
@@ -34,7 +27,7 @@ const matchByRegExp = (
 
     let out: object[] = [];
     RES.forEach(e => {
-        const D: Node = {
+        const D: token = {
             type,
             data: e
         }
@@ -51,63 +44,48 @@ const matchByRegExp = (
 
 const parse = (
     md: string
-): void => {
+): object[] => {
+
+    const buildNode = (root: []): object[] => {
+        for (let i_r = 0; i_r < root.length; i_r++) {
+            const ELM = root[i_r];
+
+            if ()
+        }
+
+
+        return root;
+
+    }
 
     let root: object[] = [];
+    let text: string[] = [...md];
 
-    Object.keys(RULE).forEach(n => {
+    Object.keys(RULE).forEach((n: string): void => {
 
         const RES = matchByRegExp(md, RULE[n][0], n);
 
-        RES.token.forEach(e =>
+        RES.token.forEach((e: token): void => {
             root.push([e])
-        );
+        });
 
     });
 
-    console.log(root);
 
-    for (let i_r = 0; i_r < root.length; i_r++) {
-        const element = root[i_r];
 
-    }
+    return root;
 
 }
 
 
+const bold = (txt: string) => {
 
-const bold = (txt: string): string[] => {
-    let m1: string = "";
-    let c: string = "";
-    let f: boolean = false;
-    let res: string[] = []
-
-    for (let i = 0; i < txt.length; i++) {
-        if (txt[i] === "'") {
-            m1 += "'";
-        } else {
-            m1 = "";
-        }
-
-        if (m1 === "''") {
-            f = !f;
-        }
-
-        if (f) {
-            c += txt[i];
-        } else {
-            res.push(c);
-            c = "";
-        }
-    }
-
-    return res;
 }
 
 
-//parse(`もじもじ **太字** %%斜体%%の文字**文字の%%中に%%ネスト**`);
 console.log(
-    bold("''太字左'''斜体'''太字右''ふつーーー''太字''")
+    parse(`もじもじ **太字** %%斜体%%の文字**文字の%%中に%%ネスト**`)
+    //bold("''太字左'''斜体'''太字右''ふつーーー''太字''")
 );
 
 

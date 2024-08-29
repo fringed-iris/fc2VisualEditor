@@ -1,7 +1,7 @@
 type Rule = Record<
     string, [
         RegExp,
-        string
+        string,
     ]
 >;
 
